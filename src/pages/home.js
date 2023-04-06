@@ -1,19 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from '../components/Header';
+import Navigation from '../components/Navigation';
+import Button from '../components/Button';
+
 const Home = () => {
   return (
     <div>
-      <h1>Notedly</h1>
       <p>This is the home page</p>
-      <ul>
-        <li>
-          <Link to='/mynotes'>My Notes</Link>
-        </li>
-        <li>
-          <Link to='/favorites'>Favorites</Link>
-        </li>
-      </ul>
+      <Button>Click me!</Button>
     </div>
   );
 };
