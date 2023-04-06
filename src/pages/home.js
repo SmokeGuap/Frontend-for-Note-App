@@ -1,16 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import { useQuery, gql } from '@apollo/client';
 
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
 import Button from '../components/Button';
+import NoteFeed from '../components/NoteFeed';
+
+const GET_NOTES = gql`
+  query NoteFeed($cursor: String) {
+    noteFeed(cursor: $cursor) {
+      cursor
+      hasNextPage
+      notes {
+        id
+        createdAt
+        content
+        favoriteCount
+        author {
+          username
+          id
+          avatar
+        }
+      }
+    }
+  }
+`;
 
 const Home = () => {
-  return (
-    <div>
-      <p>This is the home page</p>
-      <Button>Click me!</Button>
-    </div>
-  );
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
+  return <NoteFeed notes={data.noteFeed.notes} />;
 };
 export default Home;
