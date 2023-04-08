@@ -1,7 +1,21 @@
 import React from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../img/logo.svg';
+import ButtonAsLink from './ButtonAsLink';
+import withRouter from './withRouter';
+
+const IS_LOGGED_IN = gql`
+  {
+    isLoggedIn @client
+  }
+`;
+
+const UserState = styled.div`
+  margin-left: auto;
+`;
 
 const HeaderBar = styled.header`
   width: 100%;
@@ -21,11 +35,37 @@ const LogoText = styled.h1`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { data, client } = useQuery(IS_LOGGED_IN);
+
   return (
     <HeaderBar>
       <img src={logo} alt='Notedly Logo' height='40' />
       <LogoText>Notedly</LogoText>
+      <UserState>
+        {data.isLoggedIn ? (
+          <ButtonAsLink
+            onClick={() => {
+              localStorage.removeItem('token');
+              client.resetStore();
+              // client.writeData({ data: { isLoggedIn: false } });
+              client.cache.writeQuery({
+                query: IS_LOGGED_IN,
+                data: { isLoggedIn: false },
+              });
+              navigate('/');
+            }}
+          >
+            Logout
+          </ButtonAsLink>
+        ) : (
+          <p>
+            <Link to={'/signin'}>Sign In</Link> or{' '}
+            <Link to={'/signup'}>Sign Up</Link>
+          </p>
+        )}
+      </UserState>
     </HeaderBar>
   );
 };
-export default Header;
+export default withRouter(Header);
