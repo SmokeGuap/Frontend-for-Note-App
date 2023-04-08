@@ -9,6 +9,8 @@ import Favorites from './favorites';
 import NotePage from './note';
 import SignUp from './signup';
 import SignIn from './signin';
+import NewNote from './new';
+import EditNote from './edit';
 
 const IS_LOGGED_IN = gql`
   {
@@ -33,6 +35,18 @@ const Pages = () => {
           path='/favorites'
           element={
             data.isLoggedIn === true ? <Favorites /> : <Navigate to='/signin' />
+          }
+        />
+        <Route
+          path='/new'
+          element={
+            data.isLoggedIn === true ? <NewNote /> : <Navigate to='/signin' />
+          }
+        />
+        <Route
+          path='/edit/:id'
+          element={
+            data.isLoggedIn === true ? <EditNote /> : <Navigate to='/signin' />
           }
         />
         <Route path='/note/:id' element={<NotePage />} />
