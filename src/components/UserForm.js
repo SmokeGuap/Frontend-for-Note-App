@@ -30,6 +30,7 @@ const UserForm = (props) => {
       [event.target.name]: event.target.value,
     });
   };
+
   return (
     <Wrapper>
       {props.formType === 'signup' ? <h2>Sign Up</h2> : <h2>Sign In</h2>}

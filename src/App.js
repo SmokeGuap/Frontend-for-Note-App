@@ -6,7 +6,6 @@ import {
   InMemoryCache,
   gql,
 } from '@apollo/client';
-// import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 
 import Pages from './pages/index';
@@ -44,8 +43,6 @@ cache.writeQuery({
   query: IS_LOGGED_IN,
   data,
 });
-// client.writeData({ data });
-// client.onResetStore(() => cache.writeData({ data }));
 client.onResetStore(() =>
   cache.writeQuery({
     query: IS_LOGGED_IN,

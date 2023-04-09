@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Button from './Button';
 
 const Wrapper = styled.div`
-  height: 100%;
+  height: 50%;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 const Form = styled.form`
   height: 100%;
@@ -12,6 +14,14 @@ const Form = styled.form`
 const TextArea = styled.textarea`
   width: 100%;
   height: 90%;
+  resize: none;
+  outline: none;
+  border: 1px solid #87ceeb;
+  border-radius: 10px;
+  padding: 5px 10px;
+  :focus {
+    border: 2px solid #87ceeb;
+  }
 `;
 
 const NoteForm = (props) => {
@@ -43,7 +53,9 @@ const NoteForm = (props) => {
           value={value.content}
           onChange={onChange}
         />
-        <Button type='submit'>Save</Button>
+        <Button style={{ width: '100%' }} type='submit'>
+          Save
+        </Button>
       </Form>
     </Wrapper>
   );

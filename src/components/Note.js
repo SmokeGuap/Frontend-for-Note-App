@@ -22,6 +22,11 @@ const MetaInfo = styled.div`
 const UserActions = styled.div`
   margin-left: auto;
 `;
+const NoteText = styled.pre`
+  border: 1px solid #87ceeb;
+  border-radius: 10px;
+  padding: 0 10px;
+`;
 
 const Note = ({ note }) => {
   const { loading, error, data } = useQuery(IS_LOGGED_IN);
@@ -33,13 +38,14 @@ const Note = ({ note }) => {
       <MetaData>
         <MetaInfo>
           <img
+            style={{ borderRadius: '50%' }}
             src={note.author.avatar}
             alt='{note.author.username} avatar'
             height='50px'
           />
         </MetaInfo>
         <MetaInfo>
-          <em>by</em> {note.author.username} <br />
+          <span>Author: </span> {note.author.username} <br />
           {note.createdAt.slice(0, 10)}
         </MetaInfo>
         {data.isLoggedIn ? (
@@ -52,7 +58,9 @@ const Note = ({ note }) => {
           </UserActions>
         )}
       </MetaData>
-      <ReactMarkdown children={note.content} />
+      <NoteText>
+        <ReactMarkdown children={note.content} />
+      </NoteText>
     </StyledNote>
   );
 };

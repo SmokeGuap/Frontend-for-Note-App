@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Nav = styled.nav`
   padding: 1em;
-  background: #f5f4f0;
+  background: #add8e6;
   @media (max-width: 700px) {
     padding-top: 64px;
   }
@@ -12,7 +12,6 @@ const Nav = styled.nav`
     position: fixed;
     width: 220px;
     height: calc(100% - 64px);
-    overflow-y: scroll;
   }
 `;
 const NavList = styled.ul`
@@ -46,10 +45,10 @@ const Navigation = () => {
           <Link to='/mynotes'>My Notes</Link>
         </li>
         <li>
-          <Link to='/favorites'>Favorites</Link>
+          <Link to='/favorites'>Favorites Notes</Link>
         </li>
         <li>
-          <Link to='/new'>New</Link>
+          <Link to='/new'>Create Note</Link>
         </li>
       </NavList>
     </Nav>

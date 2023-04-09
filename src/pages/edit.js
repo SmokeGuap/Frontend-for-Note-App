@@ -7,10 +7,9 @@ import NoteForm from '../components/NoteForm';
 import { GET_NOTE, GET_ME } from '../gql/query';
 import { EDIT_NOTE } from '../gql/mutation';
 
-const EditNote = (props) => {
+const EditNote = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   const { loading, error, data } = useQuery(GET_NOTE, { variables: { id } });
   const { data: userdata } = useQuery(GET_ME);
   const [editNote] = useMutation(EDIT_NOTE, {

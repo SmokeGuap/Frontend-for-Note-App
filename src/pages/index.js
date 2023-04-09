@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Layout from '../components/Layout';
 import Home from './home';
@@ -11,12 +11,7 @@ import SignUp from './signup';
 import SignIn from './signin';
 import NewNote from './new';
 import EditNote from './edit';
-
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 const Pages = () => {
   const { loading, error, data } = useQuery(IS_LOGGED_IN);

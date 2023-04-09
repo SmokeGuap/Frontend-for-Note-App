@@ -1,17 +1,12 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../img/logo.svg';
 import ButtonAsLink from './ButtonAsLink';
 import withRouter from './withRouter';
-
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 const UserState = styled.div`
   margin-left: auto;
@@ -37,18 +32,16 @@ const LogoText = styled.h1`
 const Header = () => {
   const navigate = useNavigate();
   const { data, client } = useQuery(IS_LOGGED_IN);
-
   return (
     <HeaderBar>
       <img src={logo} alt='Notedly Logo' height='40' />
-      <LogoText>Notedly</LogoText>
+      <LogoText>Notes</LogoText>
       <UserState>
         {data.isLoggedIn ? (
           <ButtonAsLink
             onClick={() => {
               localStorage.removeItem('token');
               client.resetStore();
-              // client.writeData({ data: { isLoggedIn: false } });
               client.cache.writeQuery({
                 query: IS_LOGGED_IN,
                 data: { isLoggedIn: false },
