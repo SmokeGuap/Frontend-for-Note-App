@@ -2,6 +2,8 @@
 
 It is frontend part of Note App
 
+<img src="https://github.com/SmokeGuap/Frontend-for-Note-App/assets/87711568/d09c7b11-a414-461c-92ac-274158cc9038" width="500">
+
 ## Used technologies
 
 - React
